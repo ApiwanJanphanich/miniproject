@@ -1,0 +1,66 @@
+{% load static %}
+
+<html>
+<head>
+    <title>{% block title %} HR_APP {% endblock%}</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'image/favicon-32x32.png' %}" >
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+        <div class="container-fluid">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" href="/">หน้าหลัก</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="list">แสดงรายชื่อพนักงาน</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="add">เพิ่มข้อมูลพนักงาน</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link manage" href="manage">จัดข้อมูลพนักงาน</a>
+            </li>
+            
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="logout">ออกจากระบบ</a>
+          </li>
+          {% else %}
+
+            <li class="nav-item">
+                <a class="nav-link login" href="login">เข้าสู่ระบบ</a>
+              </li>
+
+          {%endif%}
+          </ul>
+        </div>
+      </nav>
+      {% include 'msg.html' %}
+      {% block content %}
+    <div class="container">
+        <h1>Welcome to HR_APP</h1>
+        <p>This is the home page of our HR application.</p>
+
+        <div class="row">
+            {% for person in Person %}
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="{{ person.p_picture.url }}" class="card-img-top" alt="{{ person.p_firstname }} {{ person.p_lastname }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ person.p_firstname }} {{ person.p_lastname }}</h5>
+                            <p class="card-text">Position: {{ person.p_position }}</p>
+                            <p class="card-text">Department: {{ person.p_department }}</p>
+                            <a href="#" class="btn btn-primary">เพิ่มเติม</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+      </div>
+      {% endblock  %}
+</body>
+</html>

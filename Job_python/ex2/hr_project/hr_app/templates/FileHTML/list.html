@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-3">
+  <h1>ข้อมูลพนักงานแบบตาราง</h1>
+  <table class="table  table-bordered my-5 ">
+    <thead>
+      <tr class="table-primary">
+        <th>ลําดับ</th>
+        <th>ชื่อ</th>
+        <th>นามสกุล</th>
+        <th>ตําเเหน่งงาน</th>
+        <th>อายุงาน</th>
+        <th>สัญญาจ้าง</th>
+        <th>เงินเดือน</th>
+        <th>ที่อยู่</th>
+        <th>เบอร์โทร</th>
+        <th>รูป</th>
+      </tr>
+      </thead>
+     <tbody>
+      {% for  i in person %}
+     <tr>
+      <td>{{i.P_id}}</td>
+      <td>{{i.p_firstname}}</td>
+      <td>{{i.p_lastname}}</td>
+      <td>{{i.p_position}}</td>
+      <td>{{i.p_work}}</td>
+      <td>{{i.p_local}}</td>
+      <td>{{i.p_contract}}</td>
+      <td>{{i.p_salary}}</td>
+      <td>{{i.p_number}}</td>
+      <td><img src ="{{i.p_picture.url}}"width="100"></td>
+     </tr>
+     {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
